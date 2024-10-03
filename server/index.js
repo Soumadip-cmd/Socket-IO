@@ -1,24 +1,18 @@
-const { instrument } = require("@socket.io/admin-ui");
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 
-const io = require("socket.io")(8080, {
-  cors: {
-    origin: ["http://localhost:3000", "https://admin.socket.io"],
-    methods: ["GET", "POST"],
-    credentials: true,
-  },
+const httpServer = createServer();
+const socket = new Server(httpServer, { 
+  cors:{
+    origin:'http://localhost:3000',
+  }
+ });
+
+socket.on("connection", (socket) => {
+  // console.log(socket.id)
+
 });
 
-
-io.on("connect", (socket) => {
-  console.log("Socket connected:", socket.id);
-
-  socket.on("msg-event", (cb) => {
-    // Callback function to acknowledge the message
-    cb("i gotcha");
-  });
-
-  socket.emit("server-msg", "Server connected");
+httpServer.listen(8080,()=>{
+  console.log("Server connected!!..")
 });
-
-// Setting up admin-ui instrumentation
-instrument(io, { auth: false });
