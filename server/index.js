@@ -9,7 +9,7 @@ const socket = new Server(httpServer, {
  });
 
 socket.on("connection", (socket) => {
-  // console.log(socket.id)
+  console.log("kk",socket.id)
 
 });
 

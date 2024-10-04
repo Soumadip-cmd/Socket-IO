@@ -4,14 +4,15 @@ import { io } from "socket.io-client";
 
 function App() {
   const socket = io("http://localhost:8080");
-  function connectSocket() {
-    socket.on("connection", (response) => {
-      console.log(response);
-    });
-  }
 
   useEffect(() => {
-    connectSocket();
+    socket.on("connect", () => {
+      console.log("Connected to server with ID:", socket.id);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   return (
