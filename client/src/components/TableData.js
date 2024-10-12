@@ -1,6 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { io } from 'socket.io-client'
+
+const socket = io("http://localhost:8080");
 
 const TableData = () => {
+  useEffect(()=>{
+    socket.on('read-data',(val)=>{
+      console.log(val);
+    })
+  })
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-card border border-border shadow-lg rounded-lg table-fixed">

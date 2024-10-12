@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import { io } from 'socket.io-client'
+
+const socket = io("http://localhost:8080");
 
 const Form = () => {
   const [data, setData] = useState({ name: "", age: "", ph: "" })
@@ -8,8 +11,9 @@ const Form = () => {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent page reload
-    console.log("Submit", data);
+    e.preventDefault();
+    socket.emit('Data-add',data);
+    
   }
 
   return (

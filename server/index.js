@@ -10,6 +10,14 @@ const socket = new Server(httpServer, {
 
 socket.on("connection", (socket) => {
   console.log("kk",socket.id)
+   let data=[];
+
+  socket.on('Data-add',(createData)=>{
+    data.push(createData)
+    console.log(data)
+  })
+
+  socket.emit("read-data",data);
 
 });
 
