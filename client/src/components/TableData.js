@@ -3,7 +3,8 @@ import { io } from 'socket.io-client'
 
 const socket = io("http://localhost:8080");
 
-const TableData = () => {
+const TableData = (props) => {
+  const {name,age,phno}=props
   useEffect(()=>{
     socket.on('read-data',(val)=>{
       console.log(val);
@@ -22,9 +23,9 @@ const TableData = () => {
         </thead>
         <tbody>
           <tr className="bg-background text-foreground hover:bg-muted transition duration-200 border-b">
-            <td className="py-3 px-6 border border-border">Uday</td>
-            <td className="py-3 px-6 border border-border">26</td>
-            <td className="py-3 px-6 border border-border">+91 79790 77520</td>
+            <td className="py-3 px-6 border border-border">{name}</td>
+            <td className="py-3 px-6 border border-border">{age}</td>
+            <td className="py-3 px-6 border border-border">+91 {phno}</td>
             <td className="py-3 px-6 border border-border space-x-2">
               <button className="bg-gray-600 text-primary-foreground hover:bg-gray-600/80 px-3 py-1 rounded transition duration-200">Edit</button>
               <button className="bg-gray-600 text-destructive-foreground hover:bg-gray-600/80 px-3 py-1 rounded transition duration-200">Delete</button>

@@ -6,9 +6,6 @@ const Home = () => {
   return (
     <div className="">
       <Form />
-      <section className="my-6">
-        <TableData />
-      </section>
     </div>
   );
 };
